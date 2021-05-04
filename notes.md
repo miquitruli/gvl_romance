@@ -14,4 +14,6 @@
   - email
   - phone
   - website
-- asks to start over or exit
+- asks to 
+  - choose random
+  - exit

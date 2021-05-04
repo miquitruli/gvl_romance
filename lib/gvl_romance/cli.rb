@@ -6,7 +6,7 @@ class GvlRomance::CLI
         get_location
         get_user_location
       puts " "
-      puts "Don't know which location you would like? Let us choose a random location for you! (y)"
+      
         #random_location
       #restaurants_at(location)
         #restaurant + tip
@@ -23,5 +23,9 @@ class GvlRomance::CLI
       @locations.each_with_index {|location,index|
         puts " - #{location} (#{index+1})"
       }
+    end
+
+    def random_restaurant
+      puts "Don't know which location you would like? Let us choose a random location for you! (y)"
     end
   end

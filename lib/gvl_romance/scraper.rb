@@ -9,7 +9,13 @@ class GvlRomance::Scraper
 
   def restaurant_location
     name = get_page.css(".dt-list-content").first.css(".dt-neigbhorhood").text
-    print name
+    adjusted_name =  name.split(" ").uniq
+    adjusted_name[2] = adjusted_name[2] + " " + adjusted_name[3]
+    adjusted_name[4] = adjusted_name[4] + " " + adjusted_name[5]
+    adjusted_name.pop
+    adjusted_name.delete_at(3)
+    adjusted_name << "Travelers Rest"
+    print adjusted_name
   end
 
   def restaurant_name
@@ -17,3 +23,4 @@ class GvlRomance::Scraper
     puts name
   end
 end
+

@@ -2,5 +2,6 @@
 
 require_relative '../lib/gvl_romance'
 
-GvlRomance::CLI.new.call
+#GvlRomance::CLI.new.call
 
+GvlRomance::Scraper.new.restaurant_location
