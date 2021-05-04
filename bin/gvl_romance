@@ -1,1 +1,6 @@
-puts "HEllo"
+#!/usr/bin/env ruby
+
+require_relative '../lib/gvl_romance'
+
+GvlRomance::CLI.new.call
+

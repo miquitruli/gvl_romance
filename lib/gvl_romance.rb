@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require_relative "gvl_romance/version"
+require_relative "gvl_romance/cli"
+require_relative "gvl_romance/scraper"
 
 module GvlRomance
   class Error < StandardError; end
