@@ -1,8 +1,7 @@
 # GvlRomance
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/gvl_romance`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to the Greenville Restaurants GEM. This Ruby Gem provides a CLI to view the 10 best romantic restaurants in Greenville, SC according to USA Today. The CLI will give you options of what locations in Greenville the user would like, and after making thaa list of the restaurants in that location plus an expert tip! Once a restaurant is chosen, the restaurant's information can be provided to facilitate the customer to either view their menu or call the restaurant to make a reservation.
 
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
