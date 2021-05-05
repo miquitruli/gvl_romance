@@ -7,8 +7,8 @@ class GvlRomance::CLI
         get_location
         location_list
       puts " "
-        user_location
-        #random_location
+        input = gets.strip.to_i
+        user_location(input)
       #restaurants_at(location)
         #restaurant + tip
       #restaurant_info(restaurant)
@@ -26,17 +26,27 @@ class GvlRomance::CLI
       }
     end
 
-    def user_location
-      location_selected = gets.strip
-      location_i = location_selected.to_i
-      if location_i >= 1 && location_i <= 5
-        true
+    def user_location(input)
+      if input >= 1 && input <= 5
+        restaurants_at(input)
       else
-        false
+        puts "Oh oh! Seems like there was an error, please make a selection of 1-5"
+        input = gets.strip.to_i
+        location_list
+        puts " "
+        user_location(input)
       end
     end
 
     def restaurants_at(input)
+      @locations.each_with_index do|location,index|
+        selection = index + 1
+        if input == selection
+          puts "you have chosen to dine at #{location}"
+        else
+          false
+        end
+      end
     end
 
     def random_restaurant
