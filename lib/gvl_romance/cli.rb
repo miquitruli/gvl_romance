@@ -36,6 +36,9 @@ class GvlRomance::CLI
       end
     end
 
+    def restaurants_at(input)
+    end
+
     def random_restaurant
       puts "Don't know which location you would like? Let us choose a random location for you! (y)"
     end
