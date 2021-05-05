@@ -45,5 +45,6 @@ class GvlRomance::Scraper
     @@name.delete_at(10)
     puts @@name
   end
+
 end
 
