@@ -1,12 +1,13 @@
 class GvlRomance::CLI
+    
     def call
       puts "Welcome to Greenville!"
       puts "Which romantic location would you like to dine at? select 1-5"
       puts " "
         get_location
-        get_user_location
+        location_list
       puts " "
-      
+        user_location
         #random_location
       #restaurants_at(location)
         #restaurant + tip
@@ -18,11 +19,21 @@ class GvlRomance::CLI
       @locations = ["Downtown", "West Greenville", "Simpsonville", "Woodruff", "Travelers Rest"]
     end
   
-    def get_user_location
+    def location_list
       #lists locations
       @locations.each_with_index {|location,index|
         puts " - #{location} (#{index+1})"
       }
+    end
+
+    def user_location
+      location_selected = gets.strip
+      location_i = location_selected.to_i
+      if location_i >= 1 && location_i <= 5
+        true
+      else
+        false
+      end
     end
 
     def random_restaurant
