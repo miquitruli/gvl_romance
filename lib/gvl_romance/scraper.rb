@@ -5,6 +5,7 @@ class GvlRomance::Scraper
   attr_accessor :cli
   @@location = []
   @@name = []
+  @@adjusted_name_for_website = []
 
   def get_page
     Nokogiri::HTML(open("https://www.10best.com/destinations/south-carolina/greenville/restaurants/romantic-dining/"))
@@ -43,13 +44,24 @@ class GvlRomance::Scraper
     @@name.delete_at(7)
     @@name.delete_at(8) && @@name.delete_at(8) && @@name.delete_at(8)
     @@name.delete_at(10)
-    puts @@name
+    print @@name
   end
 
-  def expert_tip(input)
-    get_page = Nokogiri::HTML(open("https://www.10best.com/destinations/south-carolina/greenville/downtown/restaurants/#{input}/")).css(".expert-tips").first.css("li").first.text
-    #tip = get_page.css(".expert-tips").first.css("li").first.text
+  def expert_tip(location_input)
+    get_page = Nokogiri::HTML(open("https://www.10best.com/destinations/south-carolina/greenville/downtown/restaurants/#{location_input}/")).css(".expert-tips").first.css("li").first.text
     puts get_page
+  end
+
+  def adjusted_restaurant_names
+    adjusted_name = restaurant_name
+    adjusted_name.each do|name|
+      if name.include?(" ")
+        @@adjusted_name_for_website << name.map { |x| x == " " ? "+" : x}
+      else
+        @@adjusted_name_for_website << name
+      end
+      print @@adjusted_name_for_website.lowercase
+    end
   end
 end
 
