@@ -14,7 +14,8 @@ class GvlRomance::CLI
       puts " "
       puts "PSSSSSST, we also included an expert's tip to help you with your restaurant choice!"
       puts " "
-        restaurants_at(input)
+        printed_restaurant_location
+        #restaurants_at(input)
         #restaurant + tip
       #restaurant_info(restaurant)
     end
@@ -70,5 +71,9 @@ class GvlRomance::CLI
           false
         end
       end
+    end
+
+    def printed_restaurant_location
+      @name = GvlRomance::Restaurant.all
     end
   end
