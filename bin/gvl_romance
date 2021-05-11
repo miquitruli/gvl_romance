@@ -2,9 +2,11 @@
 
 require_relative '../lib/gvl_romance'
 
-#GvlRomance::CLI.new.call
+GvlRomance::CLI.new.call
 
-GvlRomance::Scraper.new.restaurant_location
+#GvlRomance::CLI.new.get_location
+
+#GvlRomance::Scraper.new.restaurant_location
 
 #GvlRomance::Restaurant.new.expert_tip("stellas-southern-bistro")
 

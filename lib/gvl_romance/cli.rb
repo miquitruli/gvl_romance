@@ -22,13 +22,12 @@ class GvlRomance::CLI
   
     def get_location
       #scraped locations
-      @locations = ["Downtown", "West Greenville", "Simpsonville", "Woodruff", "Travelers Rest"]
+      @locations = GvlRomance::Restaurant.all
     end
   
     def location_list
-      #lists locations
-      @locations.each_with_index {|location,index|
-        puts " - #{location} (#{index+1})"
+      @locations.each_with_index {|l,index|
+        puts " - #{l.location} (#{index+1})"
       }
     end
 
@@ -71,9 +70,5 @@ class GvlRomance::CLI
           false
         end
       end
-    end
-
-    def printed_restaurant_location
-      @name = GvlRomance::Restaurant.all
     end
   end
