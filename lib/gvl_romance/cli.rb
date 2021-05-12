@@ -47,7 +47,7 @@ class GvlRomance::CLI
       @locations.each_with_index do|location,index|
         selection = index + 1
         if input == selection
-          puts "you have chosen to dine at #{location}"
+          puts "you have chosen to dine at #{location.location}"
         else
           false
         end
@@ -56,6 +56,10 @@ class GvlRomance::CLI
 
     def random_restaurant
       puts "Don't know which location you would like? Let us choose a random location for you! (y)"
+    end
+
+    def printed_restaurant_location
+      @name = GvlRomance::Restaurant.name
     end
 
     def restaurants_at(input, restaurant_name, expert_tip)

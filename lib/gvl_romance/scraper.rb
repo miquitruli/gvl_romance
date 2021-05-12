@@ -27,8 +27,8 @@ class GvlRomance::Scraper
     get_page = Nokogiri::HTML(open("https://www.10best.com/destinations/south-carolina/greenville/restaurants/romantic-dining/"))
     r_name = get_page.css("article#vertical-slideshow h2")
     r_name.each do |n|
-      names = n.text.strip
-      name = names.uniq
+      name = n.text.strip
+      puts name
       GvlRomance::Restaurant.new(name)
     end
   end
