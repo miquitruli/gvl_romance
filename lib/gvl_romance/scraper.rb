@@ -9,11 +9,17 @@ class GvlRomance::Scraper
 
 
   def self.restaurant_location
+    @local = []
     get_page = Nokogiri::HTML(open("https://www.10best.com/destinations/south-carolina/greenville/restaurants/romantic-dining/"))
     r_name = get_page.css("article#vertical-slideshow div.dt-neigbhorhood")
-    r_name.each do |l|
-      location = l.text.strip
-      GvlRomance::Restaurant.new(location)
+    uniq_locs = r_name.each do |l|
+      locat = l.text.strip
+      @local << locat
+    end
+    local = @local.uniq 
+    locations = local << "Travelers Rest"
+    locations.each do |location|
+      GvlRomance::Restaurant.new(location) 
     end
   end
 
