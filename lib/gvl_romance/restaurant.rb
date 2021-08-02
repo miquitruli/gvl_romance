@@ -3,13 +3,15 @@ require 'open-uri'
 
 class GvlRomance::Restaurant
     attr_accessor :name, :tip, :location
-    @@all = []
-    @@name = []
+    @@all = [] 
+    @@name = [] #restaurant name
+    @@location = []
+    
 
     def initialize(location = nil, name = nil)
         @name = name
-        #@tip = tip
         @location = location
+        #@tip = tip
         save
     end
     
@@ -22,11 +24,31 @@ class GvlRomance::Restaurant
     def self.name
         GvlRomance::Scraper.restaurant_name if @@name.empty?
         @@name
-        puts @@name
+    end
+
+    def self.adjusted_name
+        adjusted = []
+        @last = []
+        newest = []
+        name=GvlRomance::Scraper.restaurant_name
+        name.each do|n|
+            names = n.text.strip
+            adjusted_name = names.split(" ")
+            adjusted << adjusted_name.join("-")
+        end
+        adjusted.each do|m|
+            adjusted_name = m.split("'")
+            newest << adjusted_name.join
+        end
+        newest.each do|x|
+            adjusted_name = x.split("+")
+            @last << adjusted_name.join
+        end
+        puts @last
     end
 
     def save
-        @@all << self
+        @@all << self #each initialize is saved
     end
 end
 

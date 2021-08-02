@@ -4,36 +4,38 @@ class GvlRomance::CLI
       puts "Welcome to Greenville!"
       puts "Which romantic location would you like to dine at? select 1-5"
       puts " "
-        get_location
-        location_list
+        get_location #method collects location
+        location_list #method displays location list with index + 1 so customer can select
       puts " "
-        input = gets.strip.to_i
-        user_location(input)
-      puts " "
-      puts "GREAT CHOICE! Here are the best romantic restaurants at that location:"
-      puts " "
-      puts "PSSSSSST, we also included an expert's tip to help you with your restaurant choice!"
-      puts " "
-        printed_restaurant_location
+        input = gets.strip.to_i #user's input
+        user_location(input) #collects user's inputs and validates if valid input #tells customer which location they have selected
+        #printed_restaurant_location
+        displayed_restaurant(input)
         #restaurants_at(input)
         #restaurant + tip
       #restaurant_info(restaurant)
     end
   
-    def get_location
+    def get_location #method collects location
       #scraped locations
       @locations = GvlRomance::Restaurant.all
     end
   
-    def location_list
+    def location_list #method displays location list with index + 1 so customer can select
       @locations.each_with_index {|l,index|
         puts " - #{l.location} (#{index+1})"
       }
     end
 
-    def user_location(input)
+    def user_location(input) #collects user's inputs and validates if valid input #tells customer which location they have selected
       if input >= 1 && input <= 5
         chosen_location(input)
+        #testing(input)
+        puts " "
+        puts "GREAT CHOICE! Here are the best romantic restaurants at that location:"
+        puts " "
+        puts "PSSSSSST, we also included an expert's tip to help you with your restaurant choice!"
+        puts " "
       else
         puts "Oh oh! Seems like there was an error, please make a selection of 1-5"
         input = gets.strip.to_i
@@ -43,11 +45,22 @@ class GvlRomance::CLI
       end
     end
 
-    def chosen_location(input)
+    def chosen_location(input) #used in user_location method. Translated the customer's input and tells customer what location they have selected
       @locations.each_with_index do|location,index|
         selection = index + 1
         if input == selection
           puts "you have chosen to dine at #{location.location}"
+        else
+          false
+        end
+      end
+    end
+
+    def testing(input)
+      @locations.each_with_index do|location,index|
+        selection = index + 1
+        if input == selection
+          #puts "ssssss #{location.location}"
         else
           false
         end
@@ -59,8 +72,16 @@ class GvlRomance::CLI
     end
 
     def printed_restaurant_location
-      @name = GvlRomance::Restaurant.name
+      name = GvlRomance::Scraper.name_and_location
+      #@locations = GvlRomance::Restaurant.all
     end
+
+    def displayed_restaurant(input)
+        GvlRomance::Scraper.name_and_location(input)
+    end
+
+
+
 
     def restaurants_at(input, restaurant_name, expert_tip)
       @locations.each_with_index do|location,index|
