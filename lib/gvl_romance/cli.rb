@@ -45,28 +45,6 @@ class GvlRomance::CLI
       end
     end
 
-    def chosen_location(input) #used in user_location method. Translated the customer's input and tells customer what location they have selected
-      @locations.each_with_index do|location,index|
-        selection = index + 1
-        if input == selection
-          puts "you have chosen to dine at #{location.location}"
-        else
-          false
-        end
-      end
-    end
-
-    def testing(input)
-      @locations.each_with_index do|location,index|
-        selection = index + 1
-        if input == selection
-          #puts "ssssss #{location.location}"
-        else
-          false
-        end
-      end
-    end
-
     def random_restaurant
       puts "Don't know which location you would like? Let us choose a random location for you! (y)"
     end
@@ -78,22 +56,5 @@ class GvlRomance::CLI
 
     def displayed_restaurant(input)
         GvlRomance::Scraper.name_and_location(input)
-    end
-
-
-
-
-    def restaurants_at(input, restaurant_name, expert_tip)
-      @locations.each_with_index do|location,index|
-        selection = index + 1
-        if input == selection
-          puts "Restaurants name: #{restaurant_name}"
-            #restaurant name
-          puts "expert tip: #{expert_tip}"
-            #expert tip
-        else
-          false
-        end
-      end
     end
   end

@@ -41,7 +41,7 @@ class GvlRomance::Restaurant
             newest << adjusted_name.join
         end
         newest.each do|x|
-            adjusted_name = x.split("+")
+            adjusted_name = x.split("-+")
             @last << adjusted_name.join
         end
         puts @last
