@@ -8,17 +8,19 @@ class GvlRomance::Restaurant
     @@location = []
     
 
-    def initialize(location = nil, name = nil)
+    def initialize(name = nil, location = nil)
         @name = name
         @location = location
+        @@name << @name
+        @@location << @location
         #@tip = tip
         save
     end
     
 
-    def self.all
-        GvlRomance::Scraper.restaurant_location if @@all.empty?
-        @@all.uniq
+    def self.location
+        GvlRomance::Scraper.restaurant_location if @@location.empty?
+        @@location.uniq
     end
 
     def self.name
@@ -26,7 +28,9 @@ class GvlRomance::Restaurant
         @@name
     end
 
-    def self.adjusted_name
+
+
+    def adjusted_name
         adjusted = []
         @last = []
         newest = []
@@ -41,7 +45,7 @@ class GvlRomance::Restaurant
             newest << adjusted_name.join
         end
         newest.each do|x|
-            adjusted_name = x.split("-+")
+            adjusted_name = x.split("+")
             @last << adjusted_name.join
         end
         puts @last

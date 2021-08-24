@@ -9,8 +9,9 @@ class GvlRomance::CLI
       puts " "
         input = gets.strip.to_i #user's input
         user_location(input) #collects user's inputs and validates if valid input #tells customer which location they have selected
-        #printed_restaurant_location
         displayed_restaurant(input)
+        
+
         #restaurants_at(input)
         #restaurant + tip
       #restaurant_info(restaurant)
@@ -18,12 +19,12 @@ class GvlRomance::CLI
   
     def get_location #method collects location
       #scraped locations
-      @locations = GvlRomance::Restaurant.all
+      @locations = GvlRomance::Restaurant.location
     end
   
     def location_list #method displays location list with index + 1 so customer can select
       @locations.each_with_index {|l,index|
-        puts " - #{l.location} (#{index+1})"
+        puts " - #{l} (#{index+1})"
       }
     end
 
@@ -34,7 +35,8 @@ class GvlRomance::CLI
         puts " "
         puts "GREAT CHOICE! Here are the best romantic restaurants at that location:"
         puts " "
-        puts "PSSSSSST, we also included an expert's tip to help you with your restaurant choice!"
+        displayed_restaurant(input)
+        puts "choose number next to restaurant name to see an expert's tip! "
         puts " "
       else
         puts "Oh oh! Seems like there was an error, please make a selection of 1-5"
@@ -45,16 +47,30 @@ class GvlRomance::CLI
       end
     end
 
+    def chosen_location(input) #used in user_location method. Translated the customer's input and tells customer what location they have selected
+      @locations.each_with_index do|location,index|
+        selection = index + 1
+        if input == selection
+          puts "you have chosen to dine at #{location}"
+        else
+          false
+        end
+      end
+    end
+
+
     def random_restaurant
       puts "Don't know which location you would like? Let us choose a random location for you! (y)"
     end
 
-    def printed_restaurant_location
-      name = GvlRomance::Scraper.name_and_location
+    #def printed_restaurant_location
+     # name = GvlRomance::Scraper.name_and_location
       #@locations = GvlRomance::Restaurant.all
-    end
+    #end
 
     def displayed_restaurant(input)
-        GvlRomance::Scraper.name_and_location(input)
+        @restaurant = GvlRomance::Scraper.name_and_location(input)
+     
     end
+
   end

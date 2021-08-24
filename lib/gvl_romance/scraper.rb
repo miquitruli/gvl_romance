@@ -3,10 +3,9 @@ require 'open-uri'
 
 class GvlRomance::Scraper
   attr_accessor :name, :location
-  #@@locations = []
-  #@@name = []
-  #@@adjusted_name_for_website = []
 
+  @@n_l = []
+  @@name
 
   def self.restaurant_location
     @local = []
@@ -19,7 +18,7 @@ class GvlRomance::Scraper
     local = @local.uniq 
     locations = local << "Travelers Rest"
     locations.each do |location|
-      GvlRomance::Restaurant.new(location) 
+      GvlRomance::Restaurant.new(name,location) 
     end
   end
 
@@ -32,33 +31,60 @@ class GvlRomance::Scraper
     end
   end
 
-  def expert_tip(location_input)
+  def self.expert_tip(input)
     get_page = Nokogiri::HTML(open("https://www.10best.com/destinations/south-carolina/greenville/downtown/restaurants/#{location_input}/")).css(".expert-tips").first.css("li").first.text
     puts get_page
   end
 
   def self.name_and_location(input)
-    @n_l = []
     get_page = Nokogiri::HTML(open("https://www.10best.com/destinations/south-carolina/greenville/restaurants/romantic-dining/"))
     name_loc = get_page.css("article#vertical-slideshow div.dt-list-headline")
     uniq_locs = name_loc.each do |a|
       name = a.css("h2").text.strip
       location = a.css("div.dt-neigbhorhood").text.strip
       if input == 1 && location == "Downtown"
-        @n_l << name
+        @@n_l << name
       elsif input == 2 && location == "Simpsonville"
-        @n_l << name
+        @@n_l << name
       elsif input == 3 && location == "Woodruff Road"
-        @n_l << name
+        @@n_l << name
       elsif input == 4 && location == "West Greenville"
-        @n_l << name
+        @@n_l << name
       elsif input == 5
-        @n_l = "Restaurant 17"
+        @@n_l = "Restaurant 17"
       else
         nil
       end
     end
-    puts @n_l
+    @@n_l
   end
+
+  def self.restaurant_display_name
+    @@n_l.each_with_index do|a,b|
+      puts "#{a} (#{b})"
+    end
+  end
+
+
+  def self.adjusted_name
+        adjusted = []
+        @last = []
+        newest = []
+        name.each do|n|
+            names = n.text.strip
+            adjusted_name = names.split(" ")
+            adjusted << adjusted_name.join("-")
+        end
+        adjusted.each do|m|
+            adjusted_name = m.split("'")
+            newest << adjusted_name.join
+        end
+        newest.each do|x|
+            adjusted_name = x.split("-+")
+            @last << adjusted_name.join
+        end
+        puts @last
+    end
+ #def self.name_and_loc
 end
 
