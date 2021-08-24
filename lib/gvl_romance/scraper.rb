@@ -50,13 +50,13 @@ class GvlRomance::Scraper
         @@n_l << name
       elsif input == 4 && location == "West Greenville"
         @@n_l << name
-      elsif input == 5
-        @@n_l = "Restaurant 17"
       else
         nil
       end
     end
-    @@n_l
+    @@n_l.each_with_index do |m,n|
+      puts "- #{m} (#{n+1})"
+    end
   end
 
   def self.restaurant_display_name

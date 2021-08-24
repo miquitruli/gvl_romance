@@ -9,7 +9,6 @@ class GvlRomance::CLI
       puts " "
         input = gets.strip.to_i #user's input
         user_location(input) #collects user's inputs and validates if valid input #tells customer which location they have selected
-        displayed_restaurant(input)
         
 
         #restaurants_at(input)
@@ -36,6 +35,7 @@ class GvlRomance::CLI
         puts "GREAT CHOICE! Here are the best romantic restaurants at that location:"
         puts " "
         displayed_restaurant(input)
+        puts " "
         puts "choose number next to restaurant name to see an expert's tip! "
         puts " "
       else
@@ -69,8 +69,13 @@ class GvlRomance::CLI
     #end
 
     def displayed_restaurant(input)
+      if input >0 && input<5
         @restaurant = GvlRomance::Scraper.name_and_location(input)
-     
+      elsif input == 5
+        puts "- Restaurant 17 (1)"
+      else
+        nil
+      end
     end
 
   end
