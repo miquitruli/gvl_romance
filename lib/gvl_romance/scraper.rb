@@ -2,7 +2,6 @@ require 'nokogiri'
 require 'open-uri'
 
 class GvlRomance::Scraper
-  attr_accessor :name, :location
 
   @@n_l = []
   @@list = [] 
@@ -43,6 +42,7 @@ class GvlRomance::Scraper
     uniq_locs = name_loc.each do |a|
       name = a.css("h2").text.strip
       location = a.css("div.dt-neigbhorhood").text.strip
+      GvlRomance::Restaurant.new(name,location)
       if input == 1 && location == "Downtown"
         @@n_l << name
       elsif input == 2 && location == "Simpsonville"
@@ -61,8 +61,7 @@ class GvlRomance::Scraper
       puts "- #{@name} (#{@index})"
     end
     puts " "
-        puts "choose number next to restaurant name to see an expert's tip! OR type (y) if you want a random restaurant chosen! "
-    puts " " 
+        puts "choose number next to restaurant name to see an expert's tip!"
   end
 
 end

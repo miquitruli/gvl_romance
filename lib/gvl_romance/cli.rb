@@ -11,11 +11,10 @@ class GvlRomance::CLI
         user_location(input) #collects user's inputs and validates if valid input #tells customer which location they have selected
         restaurant_input = gets.strip.to_i
         restaurant_tip(restaurant_input,input)
-        #random_restaurant
+        random_restaurant
     end
   
-    def get_location #method collects location
-      #scraped locations
+    def get_location #method collects location/ scraped locations
       @locations = GvlRomance::Restaurant.location
     end
   
@@ -70,4 +69,10 @@ class GvlRomance::CLI
         tip = GvlRomance::Scraper.expert_tip(restaurant_input,input)
       end
     end  
+
+    def random_restaurant
+      puts " "
+      puts "Still not sure where to go?? Let's make this fun and allow us to make a random selection for you!"
+      puts " "
+    end
   end
