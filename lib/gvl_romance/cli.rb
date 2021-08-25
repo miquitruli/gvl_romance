@@ -9,11 +9,9 @@ class GvlRomance::CLI
       puts " "
         input = gets.strip.to_i #user's input
         user_location(input) #collects user's inputs and validates if valid input #tells customer which location they have selected
-        
-
-        #restaurants_at(input)
-        #restaurant + tip
-      #restaurant_info(restaurant)
+        restaurant_input = gets.strip.to_i
+        restaurant_tip(restaurant_input,input)
+        #random_restaurant
     end
   
     def get_location #method collects location
@@ -35,9 +33,6 @@ class GvlRomance::CLI
         puts "GREAT CHOICE! Here are the best romantic restaurants at that location:"
         puts " "
         displayed_restaurant(input)
-        puts " "
-        puts "choose number next to restaurant name to see an expert's tip! "
-        puts " "
       else
         puts "Oh oh! Seems like there was an error, please make a selection of 1-5"
         input = gets.strip.to_i
@@ -58,17 +53,7 @@ class GvlRomance::CLI
       end
     end
 
-
-    def random_restaurant
-      puts "Don't know which location you would like? Let us choose a random location for you! (y)"
-    end
-
-    #def printed_restaurant_location
-     # name = GvlRomance::Scraper.name_and_location
-      #@locations = GvlRomance::Restaurant.all
-    #end
-
-    def displayed_restaurant(input)
+    def displayed_restaurant(input) #once user selects location, restaurants in that location are displayed
       if input >0 && input<5
         @restaurant = GvlRomance::Scraper.name_and_location(input)
       elsif input == 5
@@ -78,4 +63,11 @@ class GvlRomance::CLI
       end
     end
 
+    def restaurant_tip(restaurant_input,input) #user selects location and restaurant and a tip is displayed
+      if input == 5 && restaurant_input == 1
+        puts "Restaurant 17 TIP: #{get_page = Nokogiri::HTML(open("https://www.10best.com/destinations/south-carolina/greenville/downtown/restaurants/restaurant-17/")).css(".expert-tips").first.css("li").first.text}"
+      else 
+        tip = GvlRomance::Scraper.expert_tip(restaurant_input,input)
+      end
+    end  
   end

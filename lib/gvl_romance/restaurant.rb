@@ -13,7 +13,7 @@ class GvlRomance::Restaurant
         @location = location
         @@name << @name
         @@location << @location
-        #@tip = tip
+        @tip = tip
         save
     end
     
@@ -23,11 +23,9 @@ class GvlRomance::Restaurant
         @@location.uniq
     end
 
-    def self.name
-        GvlRomance::Scraper.restaurant_name if @@name.empty?
-        @@name
+    def self.tip
+        GvlRomance::Scraper.expert_tip(restaurant_input)
     end
-
 
 
     def adjusted_name
