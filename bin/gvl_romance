@@ -6,10 +6,11 @@ GvlRomance::CLI.new.call
 
 #GvlRomance::CLI.new.get_location
 
-#GvlRomance::Scraper.new.restaurant_location
+#GvlRomance::Scraper.new.restaurant_name
 
 #GvlRomance::Scraper.new.name_and_location(1)
 
 #GvlRomance::Scraper.new.expert_tip(input)
 
+#GvlRomance::Restaurant.new.name
 

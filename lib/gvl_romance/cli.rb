@@ -11,7 +11,13 @@ class GvlRomance::CLI
         user_location(input) #collects user's inputs and validates if valid input #tells customer which location they have selected
         restaurant_input = gets.strip.to_i
         restaurant_tip(restaurant_input,input)
-        random_restaurant
+      puts " "
+      puts "Still not sure where to go?? Let's make this fun and allow us to make a random selection for you!(7)"
+      puts " "
+      puts "OR select (1) to start all over. Otherwise, select (9) to end!"
+      puts " "
+        random_input = gets.strip.to_i
+        random_restaurant(random_input)
     end
   
     def get_location #method collects location/ scraped locations
@@ -54,6 +60,7 @@ class GvlRomance::CLI
 
     def displayed_restaurant(input) #once user selects location, restaurants in that location are displayed
       if input >0 && input<5
+        
         @restaurant = GvlRomance::Scraper.name_and_location(input)
       elsif input == 5
         puts "- Restaurant 17 (1)"
@@ -70,9 +77,38 @@ class GvlRomance::CLI
       end
     end  
 
-    def random_restaurant
-      puts " "
-      puts "Still not sure where to go?? Let's make this fun and allow us to make a random selection for you!"
-      puts " "
+    def random_restaurant(random_input)
+      if random_input == 7
+        @name = GvlRomance::Scraper.restaurant_name
+        @random_name = @name.sample
+        puts " You are going to #{@random_name}!"
+        puts " "
+        puts "Hope you enjoy our pick! GOODBYE!!"
+        puts " "  
+        puts "Want to start over? (1) exit? (2)"
+        new_input = gets.strip.to_i
+        continue(new_input)
+      elsif random_input == 1
+        start_over
+      elsif random_input == 9
+        puts "Thank you for allowing us to choose a romantic place for you to dine at. BYE BYE!!" 
+      else
+        nil
+      end
+    end
+
+    def start_over
+      call
+    end
+
+    def continue(new_input)
+      if new_input == 1
+        start_over
+      elsif new_input == 2
+        puts "Thank you for allowing us to choose a romantic place for you to dine at. BYE BYE!!"
+      else
+        puts "Oh oh! Seems like there was an error, please make a selection of (1/2)"
+        new_input = gets.strip.to_i
+      end
     end
   end

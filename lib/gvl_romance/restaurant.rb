@@ -2,8 +2,8 @@ require 'nokogiri'
 require 'open-uri'
 
 class GvlRomance::Restaurant
-    attr_accessor :tip, :location
-    attr_reader :name
+    attr_accessor :tip, :location, :name
+    
     @@all = [] 
     @@name = [] #restaurant name
     @@location = []
@@ -14,7 +14,6 @@ class GvlRomance::Restaurant
         @location = location
         @@name << @name
         @@location << @location
-        @tip = tip
         save
     end
     
@@ -25,11 +24,8 @@ class GvlRomance::Restaurant
     end
 
     def self.name
-       @@name
-    end
-
-    def self.tip
-        GvlRomance::Scraper.expert_tip(restaurant_input)
+        GvlRomance::Scraper.restaurant_name if @@name.empty?
+        @@name
     end
 
     def save
