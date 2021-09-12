@@ -5,19 +5,7 @@ Welcome to the Greenville Restaurants GEM. This Ruby Gem provides a CLI to view 
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'gvl_romance'
-```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install gvl_romance
+$ gem install gvl_romance
 
 ## Usage
 
