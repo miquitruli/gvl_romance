@@ -9,7 +9,7 @@ $ gem install gvl_romance
 
 ## Usage
 
-TODO: Write usage instructions here
+$ gvl_romance
 
 ## Development
 
